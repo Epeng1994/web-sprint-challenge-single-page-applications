@@ -1,8 +1,11 @@
 import React from "react";
+import {useEffect} from 'react'
 import { BrowserRouter as Route, Switch, Link } from "react-router-dom";
 import Home from './Home'
 import PizzaForm from './PizzaForm'
 import styled from 'styled-components'
+import Confirmation from './Confirmation'
+
 
 const Header = styled.div`
   display: flex;
@@ -10,39 +13,69 @@ const Header = styled.div`
   margin: 2vw;
 `
 
+const PizzaPie = styled.img`
+  height: 43.5vw;
+  display:inline;
+`
 
+const Options = styled.div`
+  margin-left:20px;
+`
 
+const MainImgBox = styled.div`
+  position: relative;
+`
 
+const OrderBttn = styled.button`
+  position: absolute;
+  left:45%;
+  top:80%;
+  padding: 2vw;
+`
 
 const App = () => {
+  useEffect(()=>{
+    console.log('here')
+  })
   return (
     <div>
       <Header>
-        Lambda Eats
         <div>
+          Lambda Eats
+        </div>
+        <Options>
           <Link to='/'>
-             Home
+            Home
           </Link>
-          <div>Help</div>          
-        </div>
-         
+          <Link to='/confirmation'>
+            Confirmation
+          </Link>
+        </Options>
       </Header>
-        <div>
-          <img src = '/Pizza.jpg' alt='Big pizza'/>
+
+        <MainImgBox>
+          <PizzaPie src = '/Pizza.jpg' alt='Big pizza'/>
           <Link to ='/pizza'>
-              <button id='order-pizza'>Pizza?</button>
+              <OrderBttn id='order-pizza'>Order now!</OrderBttn>
           </Link>
-        </div>
+        </MainImgBox>
 
       
 
       <Switch>
+
         <Route exact path ='/'>
           <Home/>
         </Route>
+
         <Route path ='/pizza'>
           <PizzaForm/>
         </Route>
+
+        <Route exact path='/confirmation'>
+          <Confirmation/>
+        </Route>
+
       </Switch>
       </div>
   );
