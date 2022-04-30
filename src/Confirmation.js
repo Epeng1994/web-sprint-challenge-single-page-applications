@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-
+import {Link, Route} from 'react-router-dom'
+import Home from './Home'
 
 const Container = styled.div`
     display: flex;
@@ -23,11 +24,10 @@ function Confirmation(){
     return(
         <Container>
             <ConfirmationDiv>
-
-                Your order of is on your way now!
-
+                <Link to = '/'>
+                    Your order of is on your way now! Click here to return to home
+                </Link>
             </ConfirmationDiv>
-           
         </Container>
     )
 }

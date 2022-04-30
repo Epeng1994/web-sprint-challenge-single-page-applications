@@ -9,6 +9,9 @@ const Title = styled.div`
     text-align:center;
     margin: 2vw;
 `
+const PizzaImg = styled.img`
+    width:50vw;
+`
 
 const PizzaFormDesign = styled.form`
     width: 50vw;
@@ -108,7 +111,6 @@ function PizzaForm (){
             setCurrentOrder({...currentOrder, [name]:value})
         }
         validate(name, value, count)
-        console.log(currentOrder)
     }
 
 
@@ -125,7 +127,7 @@ function PizzaForm (){
         }
         axios.post('https://reqres.in/api/orders',newOrder)
             .then(()=>{
-                console.log('sent to server')
+                console.log('sent to server', newOrder)
                 setCurrentOrder(emptyForm)
             })
             .catch(()=>{
@@ -150,6 +152,7 @@ function PizzaForm (){
         <div>
             <PizzaFormDesign id='pizza-form' onSubmit={onSubmit}>
                 <Title>Build Your Own Pizza</Title>
+                <PizzaImg src = './pz.jpg' alt='Build your pizza'/>
                 <div>
                     <FormLabel>Enter your name</FormLabel>
                     <input type='text' id='name-input' name = 'name' onChange = {onChange} value ={currentOrder.name}/>
@@ -207,7 +210,10 @@ function PizzaForm (){
                     <div>{errors.special}</div>
                 </div>
                 <div>
-                    <OrderBttn disabled={disabled} type='submit' id='order-button'>Add to Order</OrderBttn>
+                    <Link to='/confirmation'>
+                        <OrderBttn disabled={disabled} type='submit' id='order-button'>Add to Order</OrderBttn>
+                    </Link>
+                    
                 </div>
             </PizzaFormDesign>
         </div>
